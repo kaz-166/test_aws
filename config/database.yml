@@ -15,8 +15,7 @@
 # gem 'pg'
 #
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -79,7 +78,8 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: test_aws_production
-  username: test_aws
-  password: <%= ENV['TEST_AWS_DATABASE_PASSWORD'] %>
+  adapter: sqlite3
+  database: db/production.sqlite
+  pool: 5
+  timeout: 5000
+
